@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Event Guest Attendance</title>
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		 <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+		 <link rel="stylesheet" type="text/css" href="../resources/css/EventGuestAttendance.css">
+		 <meta charset="utf-8"/>	    
+	 	<link type="text/css" rel="stylesheet" href="../resources/css/materialize.min.css"  media="screen,projection"/>
+	    <link href="../resources/css/styles.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+	    <link type="text/css" rel="stylesheet" href="front-end_style.css"/>
+	    <link rel="stylesheet" type="text/css" href="../resources/css/animate.css">	    
+
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	</head>
+	<body>
+
+		<div id="container1" class="container">
+			<h3 class="center-align">Event Guest Attendance</h3>
+		</div>
+
+		<div id="container2" class="container">
+			<table>
+		        <thead>
+		          <tr>
+		              <th data-field="id">Name</th>
+		              <th data-field="name">Organization</th>
+		              <th data-field="price">Contact Number</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+			        <tr>
+			        <td>Alvin</td>
+			        <td>Eclair</td>
+			        <td>$0.87</td>
+			        </tr>
+			    </tbody>
+		    </table>
+		</div>
+		<br></br>
+		<div id="footerr" class="footer">
+			<div class="container center-align">				
+				<a href="#addGuest" class="modal-trigger btn"> Add Guest </a>
+			</div>
+		</div>
+
+
+		<!--Modal-->
+		<div id="addGuest" class="modal bottom-sheet">
+			<div id="mcontainer"class="container">
+				<form class="col s12">
+			      <div class="row">
+			        <div class="input-field col s3">
+			          <i class="material-icons prefix">account_circle</i>
+			          <input id="nameInput" type="text" class="validate">
+			          <label for="icon_prefix">Name</label>
+			        </div>
+			        <div class="input-field col s3">
+			          <i class="material-icons prefix">supervisor_account</i>
+			          <input id="orgInput" type="text" class="validate">
+			          <label for="icon_telephone">Organization</label>
+			        </div>
+			        <div class="input-field col s3">
+			          <i class="material-icons prefix">phone</i>
+			          <input id="numInput" type="text" class="validate">
+			          <label for="icon_telephone">Contact No.</label>
+			        </div>
+			        <div class="col s3">
+			        	
+			        	<button id="goAddGuest"class="btn waves-effect waves-light" type="submit">Add Guest<i class="material-icons right">send</i>
+          				</button>
+        			</div>
+			      </div>
+			    </form>
+			</div>
+		</div>
+		<!--Modal-->
+		<script>
+	      var myDataRef = new Firebase('https://l1wc9gv31vr.firebaseio-demo.com/');
+	      $('#messageInput').keypress(function (e) {
+	        if (e.keyCode == 13) {
+	          var name = $('#nameInput').val();
+	          var text = $('#messageInput').val();
+	          myDataRef.push({name: name, text: text});
+	          $('#messageInput').val('');
+	        }
+	      });
+	      myDataRef.on('child_added', function(snapshot) {
+	        var message = snapshot.val();
+	        displayChatMessage(message.name, message.text);
+	      });
+	      function displayChatMessage(name, text) {
+	        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+	        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+	    </script>
+		<script type="text/javascript" src="../resources/js/jquery-2.1.4.min.js"></script>
+    		<script type="text/javascript" src="../resources/js/materialize.min.js"></script>
+    		<script type="text/javascript" src="../resources/js/modal.js"></script>
+	</body>
+</html>

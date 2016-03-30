@@ -1,0 +1,13 @@
+.container {
+  width: 90%; }
+
+
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 76px;
+} 
+
+p.thick {font-weight: bold;}
+
+.button-collapse {
+	color: teal;
+}
