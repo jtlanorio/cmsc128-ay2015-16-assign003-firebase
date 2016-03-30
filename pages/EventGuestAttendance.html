@@ -30,10 +30,8 @@
 		          </tr>
 		        </thead>
 		        <tbody>
-			        <tr>
-			        <td>Alvin</td>
-			        <td>Eclair</td>
-			        <td>$0.87</td>
+			        <tr id="data">
+			        
 			        </tr>
 			    </tbody>
 		    </table>
@@ -67,7 +65,7 @@
 			          <label for="icon_telephone">Contact No.</label>
 			        </div>
 			        <div class="col s3">
-			        	
+
 			        	<button id="goAddGuest"class="btn waves-effect waves-light" type="submit">Add Guest<i class="material-icons right">send</i>
           				</button>
         			</div>
@@ -78,21 +76,26 @@
 		<!--Modal-->
 		<script>
 	      var myDataRef = new Firebase('https://l1wc9gv31vr.firebaseio-demo.com/');
-	      $('#messageInput').keypress(function (e) {
+	      $('#goAddGuest').onClick(function (e) {
 	        if (e.keyCode == 13) {
 	          var name = $('#nameInput').val();
-	          var text = $('#messageInput').val();
-	          myDataRef.push({name: name, text: text});
-	          $('#messageInput').val('');
+	          var organization = $('#orgInput').val();
+	          var tel = $('#numInput').val();
+	          myDataRef.push({name: name, organization: organization, tel: tel});
+	          $('#nameInput').val('');
+	          $('#orgInput').val('');
+	          $('#numInput').val('');
 	        }
 	      });
 	      myDataRef.on('child_added', function(snapshot) {
 	        var message = snapshot.val();
-	        displayChatMessage(message.name, message.text);
+	        displayChatMessage(message.name, message.organization, message.tel);
 	      });
-	      function displayChatMessage(name, text) {
-	        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-	        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+	      function displayChatMessage(name, organization, tel) {
+	        $('<tr/>').text(tel).prepend($('<em/>')appendTo($('#data'));
+	        $('<tr/>').text(organization).prepend($('<em/>')appendTo($('#data'));
+	        $('<tr/>').text(name).prepend($('<em/>')appendTo($('#data'));
+	        $('#data')[0].scrollTop = $('#data')[0].scrollHeight;
 	    </script>
 		<script type="text/javascript" src="../resources/js/jquery-2.1.4.min.js"></script>
     		<script type="text/javascript" src="../resources/js/materialize.min.js"></script>
